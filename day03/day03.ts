@@ -2,10 +2,6 @@ console.log(await part1());
 console.log(await part2());
 
 type BatteryBank = Array<number>;
-type BatteryPower = {
-  power: number;
-  index: number;
-};
 
 async function part1() {
   const banks = parseInput(await puzzleInput());
@@ -29,7 +25,7 @@ async function part1() {
 }
 
 async function part2() {
-  const ranges = parseInput(exampleInput());
+  return 0;
 }
 
 function parseInput(input: string): BatteryBank[] {
