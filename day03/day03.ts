@@ -25,7 +25,29 @@ async function part1() {
 }
 
 async function part2() {
-  return 0;
+  const banks = parseInput(await puzzleInput());
+  let totalJoltage = 0;
+  for (const batteries of banks) {
+    const maxima = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < batteries.length; i++) {
+      const power = batteries[i] as number;
+      const numBatteriesLeft = batteries.length - i - 1;
+      for (let j = 0; j < maxima.length; j++) {
+        const currentMax = maxima[j] as number;
+        const numMaximaLeft = maxima.length - j - 1;
+        if (power > currentMax && numBatteriesLeft >= numMaximaLeft) {
+          maxima[j] = power;
+          for (let k = j + 1; k < maxima.length; k++) {
+            maxima[k] = 0;
+          }
+          break;
+        }
+      }
+    }
+    const joltage = parseInt(maxima.join(""));
+    totalJoltage += joltage;
+  }
+  return totalJoltage;
 }
 
 function parseInput(input: string): BatteryBank[] {
