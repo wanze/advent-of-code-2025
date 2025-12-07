@@ -1,25 +1,16 @@
-const directions: Array<[number, number]> = [
-  [-1, -1],
-  [0, -1],
-  [1, -1],
-  [-1, 0],
-  [1, 0],
-  [-1, 1],
-  [0, 1],
-  [1, 1],
-];
-
 console.log(await part1());
 console.log(await part2());
 
 async function part1() {
   const map = parseInput(await puzzleInput());
+  const directions = getDirections();
   const { numAccessable } = removePapers(map, directions);
   return numAccessable;
 }
 
 async function part2() {
   let map = parseInput(await puzzleInput());
+  const directions = getDirections();
   let totalRemoved = 0;
   while (true) {
     const { numAccessable, map: updatedMap } = removePapers(map, directions);
@@ -30,6 +21,19 @@ async function part2() {
     map = updatedMap;
   }
   return totalRemoved;
+}
+
+function getDirections(): Array<[number, number]> {
+  return [
+    [-1, -1],
+    [0, -1],
+    [1, -1],
+    [-1, 0],
+    [1, 0],
+    [-1, 1],
+    [0, 1],
+    [1, 1],
+  ];
 }
 
 function removePapers(
